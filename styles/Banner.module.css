@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@400;700&family=Permanent+Marker&display=swap');
+
+/* By default, this is a mobile breakpoint */
+
+.bannercontainer {
+    margin-bottom: 6rem;
+}
+
+.header {
+    font-family: 'Josefin Slab', serif;
+    letter-spacing: -0.025em;
+    font-weight: 900;
+    color: var(--text-black);
+
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.header1 {
+    color: white;
+}
+
+.header2 {
+    display: block;
+    color: #6f4e37;
+}
+
+.subtitle {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    line-height: 1rem;
+    font-family: 'Permanent Marker', cursive;
+    color: gray;
+}
+
+.buttoncontainer {
+    margin-top: 1.25rem;
+}
+
+.button {
+    background-color: #6F4E37;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    border-radius: 20px;
+    padding: 0.75rem;
+    font-family: 'Josefin Slab', serif;
+    font-weight: bolder;
+}
+
+.button:hover {
+    background-color: white;
+    color: #6F4E37;
+    border: 2px solid #6F4E37;
+} 
+
+/* 
+Breakpoints:
+------------
+
+sm: min-width: 640px; //small device
+md: min-width: 768px; //medium device
+lg: min-width: 1024px; //large device
+xl: min-width: 1280px; //Extra large device
+2xl: min-width: 1536px; // extra large device
+
+
+*/
+
+/* sm breakpoint */
+
+@media (min-width: 640px) {
+    .header {
+        font-size: 3rem;
+        line-height: 1;
+    }
+
+    .subtitle {
+        margin-top: 1.25rem;
+        max-width: 36rem;
+    }
+
+    .buttoncontainer {
+        display: flex;
+        margin-top: 2rem;
+    }
+}
+
+/* md breakpoint */
+
+@media (min-width: 768px) {
+    .header {
+        font-size: 5rem;
+        line-height: 1;
+    }
+
+    .subtitle {
+        margin-top: 1.25rem;
+    }
+
+    .button {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        font-size: 1.2rem;
+        line-height: 1.75rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}
+
+/* lg breakpoint */
+
+@media (min-width: 1024px) {
+    .bannercontainer {
+        text-align: left;
+    }
+
+    .header {
+        font-size: 5rem;
+        line-height: 1;
+    }
+
+    .subtitle {
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 1.5rem;
+    }
+
+    .buttoncontainer {
+        justify-content: flex-start;
+    }
+
+    .button {
+        font-size: 1.4rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}
+
+/* xl breakpoint */
+
+@media (min-width: 1280px) {
+    .header2 {
+        display: inline;
+    }
+}
