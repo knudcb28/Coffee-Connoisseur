@@ -1,0 +1,62 @@
+.container {
+  background-color: #f2f8f9;
+  text-decoration: none;
+  border-radius: 0.75rem /* 12px */;
+  padding-top: 0.25rem /* 4px */;
+  padding-bottom: 0.25rem /* 4px */;
+  padding-bottom: 1.25rem /* 20px */;
+  padding-left: 1rem /* 16px */;
+  padding-right: 1rem /* 16px */;
+  margin: auto;
+  border-radius: 0.75rem /* 12px */;
+}
+
+.container:hover {
+  background: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+}
+
+.cardHeaderWrapper {
+  margin-top: 0.75rem /* 12px */;
+  margin-bottom: 0.75rem /* 12px */;
+  text-align: center;
+}
+
+.cardHeader {
+  text-overflow: ellipsis;
+  font-family: "Josefin Slab";
+  white-space: nowrap;
+  font-size: 1.5rem /* 20px */;
+  line-height: 1.75rem /* 28px */;
+  font-weight: 800;
+  overflow: hidden;
+  width: 16rem /* 256px */;
+}
+
+.cardImageWrapper {
+  color: var(--text-white-100);
+  display: flex;
+  justify-content: center;
+}
+
+.cardImage {
+  border-radius: 0.75rem /* 12px */;
+  height: 13rem;
+  width: 13rem;
+}
+
+@media (min-width: 1024px) {
+  .cardHeader {
+    width: 16rem /* 256px */;
+  }
+}
+
+@media (min-width: 768px) {
+  .cardHeader {
+    width: 16rem /* 256px */;
+  }
+}
+

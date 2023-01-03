@@ -1,8 +1,36 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Banner from "../components/Banner";
+import Card from "../components/Card";
+import coffeeLogo from "../public/static/coffee.jpg";
 
-export default function Home() {
+export const getStaticProps = async () => {
+  const searchParams = new URLSearchParams({
+    query: "coffee",
+    near: "Middleton, WI",
+    open_now: "true",
+    sort: "DISTANCE",
+  });
+
+  const results = await fetch(
+    `https://api.foursquare.com/v3/places/search?${searchParams}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: "fsq3xMx9kp+e24DX7CSu3DHeYK1FRweBDKLnvxgUSSPG3Kc=",
+      },
+    }
+  );
+  const data = await results.json();
+  console.log();
+  return {
+    props: { coffeeshops: data },
+  };
+};
+
+export default function Home({ coffeeshops }) {
+  console.log(coffeeshops);
   return (
     <>
       <Head>
@@ -12,9 +40,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-       <Banner />
+        <Banner className={styles.Banner} />
+        <div className={styles.cardLayout}>
+          {coffeeshops.results.map((coffeeshop) => {
+            return (
+              <Card
+                key={coffeeshop.fsq_id}
+                className={styles.card}
+                name={coffeeshop.name}
+                href={`/coffee-store/${coffeeshop.fsq_id}`}
+                imgUrl={coffeeLogo}
+                address={coffeeshop.location.address}
+                distance={coffeeshop.distance}
+                category={coffeeshop.categories.some(category => category.name === "Coffee Shop") ? "Coffee Shop" : "Not a coffee shop"}
+              />
+            );
+          })}
+        </div>
       </main>
-
     </>
   );
 }
