@@ -2,35 +2,20 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Banner from "../components/Banner";
 import Card from "../components/Card";
-import coffeeLogo from "../public/static/coffee.jpg";
 
-export const getStaticProps = async () => {
-  const searchParams = new URLSearchParams({
-    query: "coffee",
-    near: "Middleton, WI",
-    open_now: "true",
-    sort: "DISTANCE",
-  });
+import coffeeStoresData from "../data/coffee-stores.json";
 
-  const results = await fetch(
-    `https://api.foursquare.com/v3/places/search?${searchParams}`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: "fsq3xMx9kp+e24DX7CSu3DHeYK1FRweBDKLnvxgUSSPG3Kc=",
-      },
-    }
-  );
-  const data = await results.json();
-  console.log();
+export async function getStaticProps(context) {
+  console.log("hi getStaticProps");
   return {
-    props: { coffeeshops: data },
+    props: {
+      coffeeStores: coffeeStoresData,
+    },
   };
-};
+}
 
-export default function Home({ coffeeshops }) {
-  console.log(coffeeshops);
+export default function Home(props) {
+  console.log("props", props);
   return (
     <>
       <Head>
@@ -39,20 +24,20 @@ export default function Home({ coffeeshops }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className={styles.main}>
         <Banner className={styles.Banner} />
+        {props.coffeeStores.length > 0 ? (
+          <h2 className={styles.heading2}>Middleton Coffee Stores</h2>
+        ) : null}
         <div className={styles.cardLayout}>
-          {coffeeshops.results.map((coffeeshop) => {
+          {props.coffeeStores.map((coffeeStores) => {
             return (
               <Card
-                key={coffeeshop.fsq_id}
-                className={styles.card}
-                name={coffeeshop.name}
-                href={`/coffee-store/${coffeeshop.fsq_id}`}
-                imgUrl={coffeeLogo}
-                address={coffeeshop.location.address}
-                distance={coffeeshop.distance}
-                category={coffeeshop.categories.some(category => category.name === "Coffee Shop") ? "Coffee Shop" : "Not a coffee shop"}
+                key={coffeeStores.id}
+                name={coffeeStores.name}
+                imgUrl={coffeeStores.imgUrl}
+                href={`/coffee-store/${coffeeStores.id}`}
               />
             );
           })}

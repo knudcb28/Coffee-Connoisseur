@@ -14,7 +14,7 @@
 }
 
 .cardLayout {
-  margin-top: 8rem;
+  margin-top: 4rem;
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   column-gap: 1.5rem;
@@ -23,6 +23,17 @@
 
 .card {
   justify-content: center;
+}
+
+.heading2 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  margin-top: 4rem;
+  color: black;
+  font-family: 'Permanent Marker', cursive;
+    color: gray;
+  text-align: center;
+  font-weight: bold;
 }
 
 @media (min-width: 844px) {

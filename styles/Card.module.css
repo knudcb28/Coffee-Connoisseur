@@ -44,8 +44,8 @@
 
 .cardImage {
   border-radius: 0.75rem /* 12px */;
-  height: 13rem;
-  width: 13rem;
+  height: 14rem;
+  width: 14rem;
 }
 
 @media (min-width: 1024px) {
