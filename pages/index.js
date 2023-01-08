@@ -2,19 +2,35 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Banner from "../components/Banner";
 import Card from "../components/Card";
+import { fetchCoffeeStores } from "../lib/coffee-stores";
+import { createApi } from "unsplash-js";
 
-import coffeeStoresData from "../data/coffee-stores.json";
+const unsplash = createApi({
+  accessKey: "nnAIlIg6FIWJD2PPzH-sQtIluKeDj7NmbC1uaNqa3zE",
+  
+})
 
-export async function getStaticProps(context) {
-  console.log("hi getStaticProps");
+export async function getStaticProps() {
+  const coffeeStores = await fetchCoffeeStores();
+
   return {
     props: {
-      coffeeStores: coffeeStoresData,
+      coffeeStores,
     },
   };
 }
 
 export default function Home(props) {
+  // api.search
+  //   .getPhotos({ query: "coffee" })
+  //   .then((result) => {
+  //     const coffeeData = result;
+  //     console.log(coffeeData.response.results[0].urls.full);
+  //   })
+  //   .catch(() => {
+  //     console.log("something went wrong!");
+  //   });
+
   console.log("props", props);
   return (
     <>
@@ -31,13 +47,16 @@ export default function Home(props) {
           <h2 className={styles.heading2}>Middleton Coffee Stores</h2>
         ) : null}
         <div className={styles.cardLayout}>
-          {props.coffeeStores.map((coffeeStores) => {
+          {props.coffeeStores.map((coffeeStore) => {
             return (
               <Card
-                key={coffeeStores.id}
-                name={coffeeStores.name}
-                imgUrl={coffeeStores.imgUrl}
-                href={`/coffee-store/${coffeeStores.id}`}
+                key={coffeeStore.fsq_id}
+                name={coffeeStore.name}
+                imgUrl={
+                   coffeeStore.imgUrl ||
+                  "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
+                }
+                href={`/coffee-store/${coffeeStore.fsq_id}`}
               />
             );
           })}
