@@ -11,10 +11,9 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background: url("/static/background.jpg");
   background-position: 50%;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   background-size: cover;
   color: #373b64;
-  height: 100%;
   max-width: 100%;
 }
 

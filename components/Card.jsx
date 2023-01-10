@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import styles from "../styles/Card.module.css";
-import coffeeLogo from "../public/static/coffee.jpg";
 import Image from "next/image";
 
 const Card = (props) => {
@@ -19,10 +18,7 @@ const Card = (props) => {
         <div className={styles.cardHeaderWrapper}>
           <h2 className={styles.cardHeader}>{props.name}</h2>
           <p>{props.address}</p>
-          <p>
-            {getMiles(props.distance)}
-            {` miles away`}
-          </p>
+          <p>{getMiles(props.distance)} miles away</p>
           <p>{props.category}</p>
         </div>
         <div className={styles.cardImageWrapper}>
