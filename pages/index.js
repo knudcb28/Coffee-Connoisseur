@@ -5,7 +5,7 @@ import Card from "../components/Card";
 import { fetchCoffeeStores } from "../lib/coffee-stores";
 import { useState, useEffect, useContext } from "react";
 import useTrackLocation from "../hooks/use-track-location";
-import { ACTION_TYPES, StoreContext } from "./_app";
+import { ACTION_TYPES, StoreContext } from "../store/store-context";
 
 
 export async function getStaticProps() {
@@ -55,7 +55,7 @@ export default function Home(props) {
       }
     }
     setCoffeeStoresByLocation();
-  }, [latLong]);
+  }, [dispatch, latLong]);
 
   const handleOnBannerBtnClick = () => {
     console.log("hi banner button");

@@ -1,12 +1,14 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useRouter } from "next/router";
 import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
-import { StoreContext } from "../_app";
+import { StoreContext } from "../../store/store-context";
 import styles from "../../styles/coffee-store.module.css";
 import { fetchCoffeeStores } from "../../lib/coffee-stores";
 import { isEmpty } from "../../utils";
+import { useCoffeeStores } from "../../hooks/use-track-location";
 
 export async function getStaticProps(staticProps) {
   const params = staticProps.params;
@@ -39,6 +41,7 @@ export async function getStaticPaths() {
 }
 
 const CoffeeStore = (initialProps) => {
+  
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -61,7 +64,8 @@ const CoffeeStore = (initialProps) => {
         setCoffeeStore(findCoffeeStoreById);
       }
     }
-  }, [id]);
+  }, [id, coffeeStores, initialProps.coffeeStore]);
+
 
   const { address, name, imgUrl, neighborhood } = coffeeStore;
 
