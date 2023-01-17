@@ -18,20 +18,14 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
-  console.log("props", props);
-
   const { handleTrackLocation, locationErrorMsg, isFindingLocation } =
     useTrackLocation();
-
-  // const [coffeeStores, setCoffeeStores] = useState("");
 
   const [coffeeStoresError, setCoffeeStoresError] = useState(null);
 
   const { dispatch, state } = useContext(StoreContext);
 
   const { coffeeStores, latLong } = state;
-
-  console.log({ latLong, locationErrorMsg });
 
   useEffect(() => {
     async function setCoffeeStoresByLocation() {
@@ -51,7 +45,6 @@ export default function Home(props) {
           });
           setCoffeeStoresError("");
         } catch (error) {
-          console.log({ error });
           setCoffeeStoresError(error.message);
         }
       }
@@ -60,7 +53,6 @@ export default function Home(props) {
   }, [dispatch, latLong]);
 
   const handleOnBannerBtnClick = () => {
-    console.log("hi banner button");
     handleTrackLocation();
   };
 
