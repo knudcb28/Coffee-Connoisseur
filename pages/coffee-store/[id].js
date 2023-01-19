@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useRouter } from "next/router";
 import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
@@ -41,13 +40,12 @@ export async function getStaticPaths() {
 
 const CoffeeStore = (initialProps) => {
   const router = useRouter();
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
 
   const id = router.query.id;
 
-  const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore);
+  const [coffeeStore, setCoffeeStore] = useState(
+    initialProps.coffeeStore || {}
+  );
 
   const {
     state: { coffeeStores },
@@ -55,7 +53,7 @@ const CoffeeStore = (initialProps) => {
 
   const handleCreateCoffeeStore = async (coffeeStore) => {
     try {
-      const { name, rating, imgUrl, neighborhood, address, id } = coffeeStore;
+      const { name, imgUrl, neighborhood, address, id } = coffeeStore;
       const response = await fetch("/api/createCoffeeStore", {
         method: "POST",
         headers: {
@@ -71,7 +69,7 @@ const CoffeeStore = (initialProps) => {
         }),
       });
 
-      const dbCoffeeStore = response.json();
+      const dbCoffeeStore = await response.json();
     } catch (err) {
       console.error("Error creating coffee store", err);
     }
@@ -95,7 +93,12 @@ const CoffeeStore = (initialProps) => {
     }
   }, [id, coffeeStores, initialProps, initialProps.coffeeStore]);
 
-  const { address, name, imgUrl, neighborhood } = coffeeStore;
+  const {
+    address = "",
+    name = "",
+    imgUrl = "",
+    neighborhood = "",
+  } = coffeeStore;
 
   const [votingCount, setVotingCount] = useState(0);
 
@@ -109,6 +112,10 @@ const CoffeeStore = (initialProps) => {
       setVotingCount(data[0].rating);
     }
   }, [data]);
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   const handleUpvoteButton = async () => {
     try {
